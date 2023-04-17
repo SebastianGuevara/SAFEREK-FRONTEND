@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import { uploadImageToComparedFacesBucket, getRandomImageName} from '../services/rekogniton/imageServices.js'
 import { Container } from '../components/common/Container'
 import { Button } from '../components/common/Button'
 import { Input } from '../components/common/Input'
@@ -16,12 +16,9 @@ function UploadWorkerInformation() {
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            const base64String = reader.result.replace("data:", "");
-            setImage(base64String.replace(/^.+,/, ""));
-        }
+        getRandomImageName().then(name =>{
+            uploadImageToComparedFacesBucket(name.data,file);
+        });
     }
     const handleCameraClick = async () => {
         const stream = await navigator.mediaDevices.getUserMedia({video: true});
