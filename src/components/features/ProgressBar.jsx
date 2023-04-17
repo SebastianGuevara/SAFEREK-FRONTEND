@@ -31,6 +31,9 @@ const ProgressBarContainer = styled.div`
         left: 0;
         margin: 0;
     }
+    @media(orientation: portrait) {
+        padding: 0px;
+    }
 `
 const Progress = styled.div`
     height:100%;
