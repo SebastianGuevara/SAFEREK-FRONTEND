@@ -8,6 +8,8 @@ export const Container = styled.main`
     width: 100vw;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     flex-direction: column;
+    text-align: center;
+    text-justify: center;
     
     h1{
         margin: 0;
