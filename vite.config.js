@@ -1,14 +1,21 @@
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  server: {
-    middleware: {
-      handle(req, res, next) {
-        if (req.url.endsWith('.jsx')) {
-          res.setHeader('Content-Type', 'application/javascript');
-        }
-        next();
+  plugins: [react()],
+  esbuild: {
+    loader: 'jsx',
+  },
+  resolve: {
+    alias: {
+      './runtimeConfig': './runtimeConfig.browser',
+    },
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      loader: {
+        '.js': 'jsx',
       },
     },
   },
-});
+})
