@@ -6,7 +6,6 @@ import { Input } from '../components/common/Input'
 import { useRef, useEffect } from 'react'
 
 function UploadWorkerInformation() {
-    const [image,setImage] = useState(null);
     const canvasRef = useRef(null);
     const videoRef = useRef(null);
 
@@ -32,7 +31,17 @@ function UploadWorkerInformation() {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         canvas.getContext("2d").drawImage(video,0,0);
-        setImage(canvas.toDataURL("image/png"));
+        canvas.toBlob((blob) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              const buffer = event.target.result;
+              console.log(buffer);
+              getRandomImageName().then(name =>{
+                uploadImageToComparedFacesBucket(name.data,new Blob([buffer], { type: 'image/jpeg' }));
+                });
+            };
+            reader.readAsArrayBuffer(blob);
+          }, 'image/png', 1);
     }
 
     return (
