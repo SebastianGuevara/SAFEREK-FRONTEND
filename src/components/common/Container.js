@@ -10,6 +10,7 @@ export const Container = styled.main`
     flex-direction: column;
     text-align: center;
     text-justify: center;
+    overflow: hidden;
     
     h1{
         margin: 0;
