@@ -7,4 +7,5 @@ export const FormsInput = styled(Input)`
     top: 35%;
     margin: 0;
     display: flex;
+    margin: 0;
 `

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const uploadImageToComparedFacesBucket = (name, file) => {
   const formData = new FormData();
-  formData.append('key', 'comparedFaces');
+  formData.append('key', 'collectionFaces');
   formData.append('name', name);
   formData.append('file', file);
   
