@@ -31,7 +31,6 @@ function UploadWorkerInformation() {
     const handleCameraClick = async () => {
         const stream = await navigator.mediaDevices.getUserMedia({video: true});
         const video = videoRef.current;
-        console.log(image);
         if(image){
             video.srcObject = null;
         }
@@ -61,13 +60,14 @@ function UploadWorkerInformation() {
             .then(response => response.blob())
             .then(blob => {
                 uploadImageToComparedFacesBucket(idRef.current.value,blob)
+                nameRef.current.value = '';
+                lastNameRef.current.value = '';
+                idRef.current.value = '';
+                roleRef.current.value = '';
+                setImage(null);
+                alert("Información subida con éxito");
             })
-            alert("Información subida con éxito");
-            nameRef.current.value = '';
-            lastNameRef.current.value = '';
-            idRef.current.value = '';
-            roleRef.current.value = '';
-            setImage(null);
+
         }
         else{
             alert("Hace algun espacio por rellenar");
